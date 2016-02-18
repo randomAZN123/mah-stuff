@@ -1,0 +1,196 @@
+var count = 0;
+var totalAdd = 1;
+var upgrades = [0, 0, 0, 0, 0, 0, 0];
+var upgradeCost = [10, 20, 40, 80, 160, 320, 100]; 
+var CPS = 0;
+
+if (localStorage.getItem('countLocal') != null) {
+	count = JSON.parse(localStorage.getItem('countLocal'));
+}
+if (localStorage.getItem('totalAddLocal') !=  null) {
+	totalAdd = JSON.parse(localStorage.getItem('totalAddLocal'));
+}
+if (localStorage.getItem('upgradesLocal') != null) {
+	upgrades = JSON.parse(localStorage.getItem('upgradesLocal'));
+}
+if (localStorage.getItem('upgradeCostLocal') != null) {
+	upgradeCost = JSON.parse(localStorage.getItem('upgradeCostLocal'));
+}
+if (localStorage.getItem('CPSLocal') != null) {
+	CPS = JSON.parse(localStorage.getItem('CPSLocal'));
+}
+
+$(document).ready(function() {
+
+	//initialize document look
+	$('#1').val("+1 CPS("+upgradeCost[0]+")");
+	$('#1s').html(upgrades[0]);
+	$('#2').val("+2 CPS("+upgradeCost[1]+")");
+	$('#2s').html(upgrades[1]);
+	$('#3').val("+4 CPS("+upgradeCost[2]+")");
+	$('#3s').html(upgrades[2]);
+	$('#4').val("+8 CPS("+upgradeCost[3]+")");
+	$('#4s').html(upgrades[3]);
+	$('#5').val("+16 CPS("+upgradeCost[4]+")");
+	$('#5s').html(upgrades[4]);
+	$('#6').val("+32 CPS("+upgradeCost[5]+")");
+	$('#6s').html(upgrades[5]);
+	$('#clickUp').val("*2 per click("+upgradeCost[6]+")");
+	$('#clickUps').html(upgrades[6]);
+	$('.sure').hide();
+
+	// on click of circle, add n to score
+	$("#click").click(function() {
+		count += totalAdd;
+		$('.points').html(count);
+	});
+	
+	//on click of upgrades add +1 to upgrades
+	$("#1").click(function(){
+	if (count >= upgradeCost[0]){ 
+		count -= upgradeCost[0];
+		upgrades[0] += 1;
+		$('#1s').html(upgrades[0]);
+		upgradeCost[0]=10+10*upgrades[0];
+		$('#1').val("+1 CPS("+upgradeCost[0]+")");
+		}
+	});
+
+	$("#2").click(function(){
+	if (count >= upgradeCost[1]){ 
+		count -= upgradeCost[1];
+		upgrades[1] += 1;
+		$('#2s').html(upgrades[1]);
+		upgradeCost[1]=20+20*upgrades[1];
+		$('#2').val("+2 CPS("+upgradeCost[1]+")");
+		}
+	});
+
+	$("#3").click(function(){
+	if (count >= upgradeCost[2]){ 
+		count -= upgradeCost[2];
+		upgrades[2] += 1;
+		$('#3s').html(upgrades[2]);
+		upgradeCost[2]=40+40*upgrades[2];
+		$('#3').val("+4 CPS("+upgradeCost[2]+")");
+		}
+	});
+
+	$("#4").click(function(){
+	if (count >= upgradeCost[3]){ 
+		count -= upgradeCost[3];
+		upgrades[3] += 1;
+		$('#4s').html(upgrades[3]);
+		upgradeCost[3]=80+80*upgrades[3];
+		$('#4').val("+8 CPS("+upgradeCost[3]+")");
+		}
+	});
+
+	$("#5").click(function(){
+	if (count >= upgradeCost[4]){ 
+		count -= upgradeCost[4];
+		upgrades[4] += 1;
+		$('#5s').html(upgrades[4]);
+		upgradeCost[4]=160+160*upgrades[4];
+		$('#5').val("+16 CPS("+upgradeCost[4]+")");
+		}
+	});
+
+	$("#6").click(function(){
+	if (count >= upgradeCost[5]){ 
+		count -= upgradeCost[5];
+		upgrades[5] += 1;
+		$('#6s').html(upgrades[5]);
+		upgradeCost[5]=320+320*upgrades[0];
+		$('#6').val("+32 CPS("+upgradeCost[5]+")");
+		}
+	});
+
+	$("#clickUp").click(function(){
+	if (count >= upgradeCost[6]){ 
+		count -= upgradeCost[6];	
+		totalAdd = totalAdd*2;
+		upgrades[6] += 1;
+		$('#clickUps').html(upgrades[6]);
+		upgradeCost[6]=100*totalAdd;
+		$('#clickUp').val("*2 per click("+upgradeCost[6]+")");
+		}
+	}); 
+	
+	//reset everything 
+	$(".reset").click(function() {
+		$(".reset").hide();
+		$(".sure").show();
+	});
+	
+	$(".No").click(function() {
+		$(".sure").hide();
+		$(".reset").show();
+	});
+	
+	$(".Yes").click(function(){
+		count = 0;
+		totalAdd = 1;
+		upgrades = [0, 0, 0, 0, 0, 0, 0];
+		upgradeCost = [10, 20, 40, 80, 160, 320, 100];
+		$('.points').html(0);
+		$('#1').val("+1 CPS("+upgradeCost[0]+")");
+		$('#1s').html(upgrades[0]);
+		$('#2').val("+2 CPS("+upgradeCost[1]+")");
+		$('#2s').html(upgrades[1]);
+		$('#3').val("+4 CPS("+upgradeCost[2]+")");
+		$('#3s').html(upgrades[2]);
+		$('#4').val("+8 CPS("+upgradeCost[3]+")");
+		$('#4s').html(upgrades[3]);
+		$('#5').val("+16 CPS("+upgradeCost[4]+")");
+		$('#5s').html(upgrades[4]);
+		$('#6').val("+32 CPS("+upgradeCost[5]+")");
+		$('#6s').html(upgrades[5]);
+		$('#clickUp').html(1);
+		$(".sure").hide();
+		$(".reset").show();
+	});
+	//constantly add to total from upgrades
+	var timer1 = setInterval(function() {
+		count += upgrades[0];
+		$('.points').html(count);
+	},1000);
+	
+	var timer2 = setInterval(function() {
+		count += upgrades[1];
+		$('.points').html(count);
+	},500);
+	
+	var timer3 = setInterval(function() {
+		count += upgrades[2];
+		$('.points').html(count);
+	},250);
+	
+	var timer4 = setInterval(function() {
+		count += upgrades[3];
+		$('.points').html(count);
+	},125);
+	
+	var timer5 = setInterval(function() {
+		count += upgrades[4]*2;
+		$('.points').html(count);
+	},125);
+	
+	var timer6 = setInterval(function() {
+		count += upgrades[5]*4;
+		$('.points').html(count);
+	},125);
+	
+	var timer7 = setInterval(function() {
+		CPS = upgrades[0] + upgrades[1]*2 + upgrades[2]*4 + upgrades[3]*8 + upgrades[4]*16 + upgrades[5]*32;
+		$('#20').html("CPS = "+ CPS +", per click = "+totalAdd);
+		},125);
+		
+	var timer8 = setInterval(function() {
+	localStorage.setItem('totalAddLocal',JSON.stringify(totalAdd));
+		localStorage.setItem('upgradesLocal',JSON.stringify(upgrades));
+		localStorage.setItem('upgradeCostLocal',JSON.stringify(upgradeCost));
+		localStorage.setItem('CPSLocal',JSON.stringify(CPS));
+		localStorage.setItem('countLocal',JSON.stringify(count));
+	},125);
+});

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="stylesheet" type="text/css" href="click game css"><link/>
+        <title>basic clicking game</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="click game JS"></script>
+	</head>
+	<body>
+	<h1>Click the circle to gain points</h1>
+	<div class='points'>0</div>
+	<div class='CPS/click' id='20'>CPS = 0, per click = 1</div>
+	    <input type='button' class='pushIt' id="click"></input>
+	    <button class='reset'>reset</button>
+	
+		<div class='sure'>Are you sure
+		<button class='Yes'>Yes</button>
+		<button class='No'>No</button>
+		</div>
+		
+	    <div class='selectionScreen'>
+	    Upgrades
+	    <input type='button' class='upgrade' value='+1 CPS(10)' id='1'></input>
+	    <input type='button' class='upgrade' value='+2 CPS(20)' id='2'></input>
+	    <input type='button' class='upgrade' value='+4 CPS(40)' id='3'></input>
+	    <input type='button' class='upgrade' value='+8 CPS(80)' id='4'></input>
+	    <input type='button' class='upgrade' value='+16 CPS(160)' id='5'></input>
+	    <input type='button' class='upgrade' value='+32 CPS(320)' id='6'></input>
+	    <input type='button' class='upgrade' value='*2 per click(100)' id='clickUp'></input>
+	    </div>
+		<div class='upgradeValue'>
+			<p id="1s">0</p> 
+			<p id="2s">0</p> 
+			<p id="3s">0</p> 
+			<p id="4s">0</p> 
+			<p id="5s">0</p> 
+			<p id="6s">0</p> 
+			<p id="clickUps">0</p>
+		</div>
+	    
+	</body>
+</html>
